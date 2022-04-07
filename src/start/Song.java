@@ -18,6 +18,16 @@ public class Song {
         this.length = length;
         this.streamNr = streamNr;
     }
+    public Song()
+    {
+        this.id = 0;
+        this.name = "";
+        this.artistName = "";
+        this.ft = new String[]{};
+        this.length = 0;
+        this.streamNr = 0;
+    }
+
 
     public void addStream()
     {

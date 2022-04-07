@@ -4,10 +4,10 @@ import java.util.*;
 
 
 public class Client {
-    private int id;
-    private String fName, lName;
-    private String email, phone;
-    private Card card;
+    protected int id;
+    protected String fName, lName;
+    protected String email, phone;
+    protected Card card;
 
     public Client(int id, String fName, String lName, String email, String phone, Card card) {
         this.id = id;

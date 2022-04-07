@@ -7,10 +7,10 @@ public class Album {
     protected String name;
     protected String artistName;
     protected int numberSongs;
-    protected Song[] listSongs;
+    protected List<Song> listSongs;
     protected int nrStreams;
 
-    public Album(int id, String name, String artistName, int numberSongs, Song[] listSongs) {
+    public Album(int id, String name, String artistName, int numberSongs, List<Song> listSongs) {
         this.id = id;
         this.name = name;
         this.artistName = artistName;
@@ -18,15 +18,17 @@ public class Album {
         this.listSongs = listSongs;
         this.nrStreams = 0;
         for (int i = 0; i < numberSongs; i++) {
-            this.nrStreams += listSongs[i].streamNr;
+            this.nrStreams += listSongs.get(i).streamNr;
         }
     }
 
     public void renewStreams()
     {
+        int nr = 0;
         for (int i = 0; i < numberSongs; i++) {
-            this.nrStreams += listSongs[i].streamNr;
+            nr += listSongs.get(i).streamNr;
         }
+        this.nrStreams = nr;
     }
 
 
@@ -37,7 +39,7 @@ public class Album {
                 ", name='" + name + '\'' +
                 ", artistName='" + artistName + '\'' +
                 ", numberSongs=" + numberSongs +
-                ", listSongs=" + Arrays.toString(listSongs) +
+                ", listSongs=" + listSongs +
                 ", nrStreams=" + nrStreams +
                 '}';
     }
