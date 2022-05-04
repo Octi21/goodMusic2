@@ -29,4 +29,13 @@ public class User {
                 ", password='" + password + '\'' +
                 '}';
     }
+
+    public boolean login(String username, String password)
+    {
+        if (this.username.equals(username))
+            if(this.password.equals(password))
+                return true;
+        return false;
+    }
+
 }

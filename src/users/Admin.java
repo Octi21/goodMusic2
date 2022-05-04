@@ -1,7 +1,7 @@
 package users;
 
 public class Admin extends User{
-    protected static int update =10;
+    protected static int update =0;
 
     public Admin(int id, String fName, String lName, String email, String phone, String username, String password) {
         super(id, fName, lName, email, phone, username, password);

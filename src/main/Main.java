@@ -27,5 +27,12 @@ public class Main {
                 "123",card);
 
         System.out.println(client);
+
+
+        String nume = new String("andrei");
+        if(nume.equals("andrei"))
+            System.out.println(true);
+
+
     }
 }
