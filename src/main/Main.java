@@ -3,9 +3,11 @@ package main;
 //import  start.*;
 
 import start.Card;
-import start.Client;
+//import start.Client;
+import users.*;
 
 import java.util.*;
+
 
 public class Main {
 
@@ -21,7 +23,8 @@ public class Main {
         String fName = "Andrei", lName = "Ghe";
         String email= "andreighe123@gmail.com", phone="0766602121";
 
-        Client client = new Client(id,fName,lName,email,phone,card);
+        Client client = new Client(id,fName,lName,email,phone,"Andrei",
+                "123",card);
 
         System.out.println(client);
     }
