@@ -6,8 +6,8 @@ public class Client extends User{
 
     protected Card card;
 
-    public Client(int id, String fName, String lName, String email, String phone, String username, String password, Card card) {
-        super(id, fName, lName, email, phone, username, password);
+    public Client(String fName, String lName, String email, String phone, String username, String password, Card card) {
+        super(fName, lName, email, phone, username, password);
         this.card = card;
     }
 

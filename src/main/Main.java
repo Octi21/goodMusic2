@@ -2,6 +2,7 @@ package main;
 
 //import  start.*;
 
+import services.Service;
 import start.Card;
 //import start.Client;
 import users.*;
@@ -23,16 +24,22 @@ public class Main {
         String fName = "Andrei", lName = "Ghe";
         String email= "andreighe123@gmail.com", phone="0766602121";
 
-        Client client = new Client(id,fName,lName,email,phone,"Andrei",
+        Client client = new Client(fName,lName,email,phone,"Andrei",
                 "123",card);
 
         System.out.println(client);
 
 
-        String nume = new String("andrei");
-        if(nume.equals("andrei"))
-            System.out.println(true);
+//        String nume = new String("andrei");
+//        if(nume.equals("andrei"))
+//            System.out.println(true);
 
 
+//        Service serv = new Service();
+
+        Service.creareUser();
+        Service.creareUser();
+
+        System.out.println(Service.getUs());
     }
 }

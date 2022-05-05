@@ -18,12 +18,21 @@ public class UserService {
     {
         Scanner scanner = new Scanner(System.in);
         String fName = scanner.nextLine();
-//        lName = lName;
-//        email = email;
-//        phone = phone;
-//        username = username;
-//        password = password;
+        String lName = scanner.nextLine();
+        String email = scanner.nextLine();
+        String phone = scanner.nextLine();
+        String username = scanner.nextLine();
+        String password = scanner.nextLine();
+
+        User ob1 = new User(fName,lName,email,phone,username,password);
+        this.users.add(ob1);
+        System.out.println("User adaugat");
     }
 
-
+    @Override
+    public String toString() {
+        return "UserService{" +
+                "users=" + users +
+                '}';
+    }
 }
