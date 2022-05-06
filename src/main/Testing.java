@@ -25,27 +25,16 @@ public class Testing {
 //            System.out.println(e);
 //            System.out.println("ghe");
 //        }
-
         Scanner scanner = new Scanner(System.in);
 
         Song s1 = new Song();
         s1.setPath("src\\music\\Alien.mp3");
         s1.setName("Alien");
         System.out.println(s1);
-//        Song s2 = new Song();
-//        s2.path = "src\\music\\Black Skinhead 2.mp3";
-//        s2.name = "Black Skinhead 2";
-//        System.out.println(s2);
-//        Song s3 = new Song();
-//        s3.path = "src\\music\\GodLevel.mp3";
-//        s3.name = "GodLevel";
-//        System.out.println(s3);
+
 
         List<Song> lista = new ArrayList<>();
         lista.add(s1);
-//        lista.add(s2);
-//        lista.add(s3);
-
 
         int optiune = 10;
         int opt;
@@ -64,7 +53,6 @@ public class Testing {
                 opt = scanner.nextInt();
                 String loc = lista.get(opt).getPath();
                 try {
-//               FileInputStream file = new FileInputStream("C:\\other\\An2Sem2\\jaba\\goodMusic2\\src\\music\\Alien.mp3");
                     FileInputStream file = new FileInputStream(loc);
                     Player playMP3 = new Player(file);
                     playMP3.play();
