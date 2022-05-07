@@ -2,6 +2,7 @@ package main;
 
 import song.Song;
 import song.SongDao;
+import song.SongService;
 
 import java.security.spec.RSAOtherPrimeInfo;
 import java.sql.Connection;
@@ -36,8 +37,17 @@ public class DBtest {
 //        }
 
         Song song;
-        List <Song> songs = new ArrayList<>();
+        ArrayList <Song> songs = new ArrayList<>();
         songs = SongDao.getObject().getTable();
         System.out.println(songs);
+
+
+        SongService songService= new SongService(songs);
+        Song.setAux(songService.lastId());
+        Song ob = songService.CreateSong();
+        System.out.println(ob);
+
+
+
     }
 }

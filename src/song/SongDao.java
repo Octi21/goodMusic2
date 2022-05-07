@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SongDao implements Dao<Song> {
-    private static List<Song> songs = new ArrayList<>();
+    private static ArrayList<Song> songs = new ArrayList<>();
     private static SongDao singelton = null;
 
 
@@ -27,9 +27,9 @@ public class SongDao implements Dao<Song> {
 
 
     @Override
-    public List<Song> getTable()
+    public ArrayList<Song> getTable()
     {
-        List<Song>  songList =new ArrayList<>();
+        ArrayList <Song>  songList =new ArrayList<>();
         try{
             String query = "select * from song";
             PreparedStatement preparedStatement =
@@ -68,14 +68,36 @@ public class SongDao implements Dao<Song> {
     }
 
     @Override
-    public Song getById(int id){
+    public Song getById(int id) {
         return new Song();
     }
 
+
     @Override
-    public int insert(Song song){
-        return 0;
+    public int insert(Song song)
+    {
+        if (song == null)
+            return -1;
+        songs.add(song);
+        try {
+            String query = "insert into song(id,name," +
+                    "artistName,ft,length,streamNr) values " +
+                    "(?,?,?,?,?,?)";
+            PreparedStatement preparedStatement = Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,song.getId());
+            preparedStatement.setString(2,song.getName());
+            preparedStatement.setString(3,song.getArtistName());
+            preparedStatement.setString(4,song.getFt());
+            preparedStatement.setFloat(5,song.getLength());
+            preparedStatement.setInt(6,song.getStreamNr());
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return song.getId();
     }
+
+
     @Override
     public int update(Song song){
         return 0;

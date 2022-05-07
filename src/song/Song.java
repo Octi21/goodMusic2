@@ -3,6 +3,8 @@ package song;
 import java.util.*;
 
 public class Song {
+    protected static int aux = 0;
+
     protected int id;
     protected String name;
     protected String artistName;
@@ -18,6 +20,19 @@ public class Song {
         this.length = length;
         this.streamNr = streamNr;
     }
+
+    public Song(String name, String artistName, String ft, float length, int streamNr) {
+        this.name = name;
+        this.artistName = artistName;
+        this.ft = ft;
+        this.length = length;
+        this.streamNr = streamNr;
+
+        aux += 1;
+        this.id = aux;
+    }
+
+
     public Song()
     {
         this.id = 0;
@@ -94,4 +109,11 @@ public class Song {
         this.streamNr = streamNr;
     }
 
+    public static int getAux() {
+        return aux;
+    }
+
+    public static void setAux(int aux) {
+        Song.aux = aux;
+    }
 }
