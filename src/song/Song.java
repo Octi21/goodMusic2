@@ -35,7 +35,8 @@ public class Song {
 
     public Song()
     {
-        this.id = 0;
+        aux += 1;
+        this.id = aux;
         this.name = "";
         this.artistName = "";
         this.ft = "";
