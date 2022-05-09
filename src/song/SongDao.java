@@ -59,7 +59,7 @@ public class SongDao implements Dao<Song> {
             float length = resultSet.getFloat("length");
             int streamNr = resultSet.getInt("streamNr");
 
-            return new Song(id,name,artistName,ft,length,streamNr);
+            return new Song(id,name,artistName,ft,length,streamNr,-1,-1);
 
         } catch (Exception e){
             e.printStackTrace();

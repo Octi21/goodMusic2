@@ -12,21 +12,28 @@ public class Song {
     protected float length;
     protected int streamNr;
 
-    public Song(int id, String name, String artistName, String ft, float length, int streamNr) {
+    protected int idArtist;
+    protected int idAlbum;
+
+    public Song(int id, String name, String artistName, String ft, float length, int streamNr, int idArtist, int idAlbum) {
         this.id = id;
         this.name = name;
         this.artistName = artistName;
         this.ft = ft;
         this.length = length;
         this.streamNr = streamNr;
+        this.idArtist = idArtist;
+        this.idAlbum = idAlbum;
     }
 
-    public Song(String name, String artistName, String ft, float length, int streamNr) {
+    public Song(String name, String artistName, String ft, float length, int streamNr, int idArtist, int idAlbum) {
         this.name = name;
         this.artistName = artistName;
         this.ft = ft;
         this.length = length;
         this.streamNr = streamNr;
+        this.idArtist = idArtist;
+        this.idAlbum = idAlbum;
 
         aux += 1;
         this.id = aux;
@@ -56,9 +63,11 @@ public class Song {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", artistName='" + artistName + '\'' +
-                ", ft=" + ft +
+                ", ft='" + ft + '\'' +
                 ", length=" + length +
-                ", StreamNumber= " + streamNr +
+                ", streamNr=" + streamNr +
+                ", idArtist=" + idArtist +
+                ", idAlbum=" + idAlbum +
                 '}';
     }
 
@@ -116,5 +125,21 @@ public class Song {
 
     public static void setAux(int aux) {
         Song.aux = aux;
+    }
+
+    public int getIdArtist() {
+        return idArtist;
+    }
+
+    public void setIdArtist(int idArtist) {
+        this.idArtist = idArtist;
+    }
+
+    public int getIdAlbum() {
+        return idAlbum;
+    }
+
+    public void setIdAlbum(int idAlbum) {
+        this.idAlbum = idAlbum;
     }
 }
