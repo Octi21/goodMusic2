@@ -14,18 +14,19 @@ public class Album {
     protected List<Song> listSongs;
     protected int nrStreams;
 
-    public Album(int id, String name, String artistName, int numberSongs, List<Song> listSongs) {
+    protected int idArtist;
+
+    public Album(int id, String name, String artistName, int numberSongs, List<Song> listSongs,int nrStreams,int idArtist) {
         this.id = id;
         this.name = name;
         this.artistName = artistName;
         this.numberSongs = numberSongs;
         this.listSongs = listSongs;
-        this.nrStreams = 0;
-        for (int i = 0; i < numberSongs; i++) {
-            this.nrStreams += listSongs.get(i).getStreamNr();
-        }
+        this.nrStreams = nrStreams;
+
+        this.idArtist = idArtist;
     }
-    public Album(String name, String artistName, int numberSongs, List<Song> listSongs) {
+    public Album(String name, String artistName, int numberSongs, List<Song> listSongs,int nrStreams,int idArtist) {
         aux += 1;
         this.id = aux;
 
@@ -33,10 +34,10 @@ public class Album {
         this.artistName = artistName;
         this.numberSongs = numberSongs;
         this.listSongs = listSongs;
-        this.nrStreams = 0;
-        for (int i = 0; i < numberSongs; i++) {
-            this.nrStreams += listSongs.get(i).getStreamNr();
-        }
+        this.nrStreams = nrStreams;
+
+        this.idArtist = idArtist;
+
     }
 
     public Album()
@@ -49,6 +50,7 @@ public class Album {
         this.numberSongs = 0;
         this.listSongs = null;
         this.nrStreams = 0;
+        this.idArtist = -1;
     }
 
 
@@ -129,4 +131,13 @@ public class Album {
     public void setNrStreams(int nrStreams) {
         this.nrStreams = nrStreams;
     }
+
+    public int getIdArtist() {
+        return idArtist;
+    }
+
+    public void setIdArtist(int idArtist) {
+        this.idArtist = idArtist;
+    }
 }
+

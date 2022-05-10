@@ -53,9 +53,13 @@ public class AlbumDao implements Dao<Album> {
                     "artistName");
             int nrSongs = resultSet.getInt("nrSongs");
             ArrayList<Song> songs = new ArrayList<>();
+
             int nrStreams = resultSet.getInt("nrStreams");
+            int idArtist = resultSet.getInt("idArtist");
+
             // ce fac cu nr streams ?
-            return new Album(id,name,artistName,nrSongs,songs);
+            return new Album(id,name,artistName,nrSongs,songs
+                    ,nrStreams,idArtist);
 
         }catch (Exception e) {
             e.printStackTrace();
@@ -92,6 +96,7 @@ public class AlbumDao implements Dao<Album> {
                     album.getNumberSongs());
             preparedStatement.setInt(5,
                     album.getNrStreams());
+            preparedStatement.setInt(6,album.getIdArtist());
 
         } catch (Exception e){
             e.printStackTrace();

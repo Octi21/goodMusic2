@@ -18,7 +18,7 @@ public class SongDao implements Dao<Song> {
         songs = getTable();
     }
 
-    public static SongDao getObject()
+    public static SongDao getInstance()
     {
         if(singelton == null)
             singelton = new SongDao();
@@ -59,7 +59,10 @@ public class SongDao implements Dao<Song> {
             float length = resultSet.getFloat("length");
             int streamNr = resultSet.getInt("streamNr");
 
-            return new Song(id,name,artistName,ft,length,streamNr,-1,-1);
+            int idArtist = resultSet.getInt("idArtist");
+            int idAlbum = resultSet.getInt("idAlbum");
+
+            return new Song(id,name,artistName,ft,length,streamNr,idArtist,idAlbum);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -82,7 +85,7 @@ public class SongDao implements Dao<Song> {
         try {
             String query = "insert into song(id,name," +
                     "artistName,ft,length,streamNr) values " +
-                    "(?,?,?,?,?,?)";
+                    "(?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,song.getId());
             preparedStatement.setString(2,song.getName());
@@ -90,6 +93,10 @@ public class SongDao implements Dao<Song> {
             preparedStatement.setString(4,song.getFt());
             preparedStatement.setFloat(5,song.getLength());
             preparedStatement.setInt(6,song.getStreamNr());
+
+            preparedStatement.setInt(7,song.getIdArtist());
+            preparedStatement.setInt(8,song.getIdAlbum());
+
 
         } catch (Exception e){
             e.printStackTrace();

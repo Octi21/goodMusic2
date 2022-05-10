@@ -24,8 +24,8 @@ public class UserService {
         String username = scanner.nextLine();
         String password = scanner.nextLine();
 
-        User ob1 = new User(fName,lName,email,phone,username,password);
-        this.users.add(ob1);
+//        User ob1 = new User(fName,lName,email,phone,username,password);
+//        this.users.add(ob1);
         System.out.println("User adaugat");
     }
 

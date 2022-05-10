@@ -37,6 +37,17 @@ public class Card {
         this.idClient = idClient;
     }
 
+    public Card() {
+        this.id = -1;
+        this.number = "";
+        this.holderName = "";
+        this.cvv = -1;
+        this.expDate = new Date();
+        this.iBan = "";
+
+        this.idClient = -1;
+    }
+
     public static int getAux() {
         return aux;
     }

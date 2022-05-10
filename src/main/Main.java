@@ -3,7 +3,7 @@ package main;
 //import  start.*;
 
 import services.Service;
-import start.Card;
+import card.Card;
 //import start.Client;
 import users.*;
 
@@ -19,7 +19,7 @@ public class Main {
         int cvv = 123;
         Date expDate = new Date(2022, Calendar.DECEMBER,3);
         String iBan = "RO12300000GHE123";
-        Card card = new Card(number,holderName,cvv,expDate,iBan);
+        Card card = new Card(1,number,holderName,cvv,expDate,iBan,-1);
         int id = 1;
         String fName = "Andrei", lName = "Ghe";
         String email= "andreighe123@gmail.com", phone="0766602121";

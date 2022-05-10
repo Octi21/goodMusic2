@@ -34,7 +34,11 @@ public class SongService {
         float length = scanner.nextFloat();
         int streamNr = scanner.nextInt();
 
-        Song ob1 = new Song(name,artistName,ft,length,streamNr);
+        int idArtist = scanner.nextInt();
+        int idAlbum = scanner.nextInt();
+
+        Song ob1 = new Song(name,artistName,ft,length,streamNr,
+                idArtist,idAlbum);
         System.out.println("Song added");
         return ob1;
     }

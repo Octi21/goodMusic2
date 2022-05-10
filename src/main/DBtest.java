@@ -38,7 +38,7 @@ public class DBtest {
 
         Song song;
         ArrayList <Song> songs = new ArrayList<>();
-        songs = SongDao.getObject().getTable();
+        songs = SongDao.getInstance().getTable();
         System.out.println(songs);
 
 
