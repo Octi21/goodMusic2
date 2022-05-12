@@ -28,7 +28,7 @@ public class ArtistDao implements Dao<Artist> {
     {
         ArrayList<Artist> artistList = new ArrayList<>();
         try{
-            String query = "select * from artist";
+            String query = "select * from artist;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -74,12 +74,14 @@ public class ArtistDao implements Dao<Artist> {
         artists.add(artist);
         try{
             String query = "insert into artist(id,name,nrSongs," +
-                    "nrAlbums) values (?,?,?,?)";
+                    "nrAlbums) values (?,?,?,?);";
             PreparedStatement preparedStatement = Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,artist.getId());
             preparedStatement.setString(2,artist.getName());
             preparedStatement.setInt(3,artist.getNrSongs());
             preparedStatement.setInt(4,artist.getNrAlbums());
+
+            preparedStatement.executeUpdate();
 
         }catch (Exception e){
             e.printStackTrace();

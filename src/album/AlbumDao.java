@@ -29,7 +29,7 @@ public class AlbumDao implements Dao<Album> {
     {
         ArrayList <Album> albumList  = new ArrayList<>();
         try{
-            String query = "select * from album";
+            String query = "select * from album;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -97,6 +97,8 @@ public class AlbumDao implements Dao<Album> {
             preparedStatement.setInt(5,
                     album.getNrStreams());
             preparedStatement.setInt(6,album.getIdArtist());
+
+            preparedStatement.executeUpdate();
 
         } catch (Exception e){
             e.printStackTrace();

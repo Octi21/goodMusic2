@@ -55,7 +55,7 @@ public class CardDao implements Dao<Card> {
     public ArrayList<Card> getTable() {
         ArrayList<Card> listCard = new ArrayList<>();
         try {
-            String query = "select * from card";
+            String query = "select * from card;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -77,7 +77,7 @@ public class CardDao implements Dao<Card> {
         cards.add(card);
         try{
             String query = "insert into card(id,number,holderName" +
-                    "cvv,expDate,iBan,idClient) values(?,?,?,?,?,?,?)";
+                    "cvv,expDate,iBan,idClient) values(?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,card.getId());
@@ -92,8 +92,7 @@ public class CardDao implements Dao<Card> {
                     card.getiBan());
             preparedStatement.setInt(7,card.getIdClient());
 
-
-
+            preparedStatement.executeUpdate();
 
 
         }catch (Exception e){

@@ -53,7 +53,7 @@ public class ClientDao implements Dao<Client> {
     public ArrayList<Client> getTable() {
         ArrayList<Client> listClient = new ArrayList<>();
         try{
-            String query = "select * from client";
+            String query = "select * from client;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -76,7 +76,7 @@ public class ClientDao implements Dao<Client> {
         try{
             String query = "insert into client(id,fName,lName,email" +
                     ",phone,username,password) values " +
-                    "(?,?,?,?,?,?,?)";
+                    "(?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,client.getId());
@@ -92,6 +92,8 @@ public class ClientDao implements Dao<Client> {
                     client.getUsername());
             preparedStatement.setString(7,
                     client.getPassword());
+
+            preparedStatement.executeUpdate();
 
         }catch (Exception e){
             e.printStackTrace();

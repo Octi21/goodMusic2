@@ -31,7 +31,7 @@ public class SongDao implements Dao<Song> {
     {
         ArrayList <Song>  songList =new ArrayList<>();
         try{
-            String query = "select * from song";
+            String query = "select * from song;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,7 +85,7 @@ public class SongDao implements Dao<Song> {
         try {
             String query = "insert into song(id,name," +
                     "artistName,ft,length,streamNr) values " +
-                    "(?,?,?,?,?,?,?,?)";
+                    "(?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement = Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,song.getId());
             preparedStatement.setString(2,song.getName());
@@ -96,6 +96,8 @@ public class SongDao implements Dao<Song> {
 
             preparedStatement.setInt(7,song.getIdArtist());
             preparedStatement.setInt(8,song.getIdAlbum());
+
+            preparedStatement.executeUpdate();
 
 
         } catch (Exception e){

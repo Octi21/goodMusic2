@@ -56,7 +56,7 @@ public class AdminDao implements Dao<Admin> {
     public ArrayList<Admin> getTable() {
         ArrayList<Admin> listAdmins = new ArrayList<>();
         try{
-            String query = "select * from admin";
+            String query = "select * from admin;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -79,7 +79,7 @@ public class AdminDao implements Dao<Admin> {
         try{
             String query = "insert into client(id,fName,lName,email" +
                     ",phone,username,password,update) values " +
-                    "(?,?,?,?,?,?,?,?)";
+                    "(?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,admin.getId());
@@ -97,6 +97,8 @@ public class AdminDao implements Dao<Admin> {
                     admin.getPassword());
             preparedStatement.setInt(8,
                     admin.getUpdate());
+
+            preparedStatement.executeUpdate();
 
         }catch (Exception e){
             e.printStackTrace();
