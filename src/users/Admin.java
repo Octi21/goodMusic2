@@ -5,17 +5,19 @@ import start.Card;
 public class Admin extends User{
     protected static int aux = 0;
 
-    protected static int update =0;
+    protected int update;
 
-    public Admin(int id,String fName, String lName, String email, String phone, String username, String password) {
+    public Admin(int id,String fName, String lName, String email, String phone, String username, String password,int update) {
         super(id,fName, lName, email, phone, username, password);
+        this.update = update;
     }
 
-    public Admin(String fName, String lName, String email, String phone, String username, String password) {
+    public Admin(String fName, String lName, String email, String phone, String username, String password,int update) {
         super(fName, lName,  email,  phone,  username,  password);
         aux +=1;
         this.id = aux;
 
+        this.update = update;
     }
 
     @Override
@@ -32,12 +34,12 @@ public class Admin extends User{
                 '}';
     }
 
-    public static int getUpdate() {
+    public int getUpdate() {
         return update;
     }
 
-    public static void setUpdate(int update) {
-        Admin.update = update;
+    public void setUpdate(int update) {
+        this.update = update;
     }
 
     public static int getAux() {

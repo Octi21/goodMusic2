@@ -17,6 +17,8 @@ public class Client extends User{
         aux +=1;
         this.id = aux;
 
+        this.card = card;
+
     }
 
     @Override

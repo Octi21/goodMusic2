@@ -6,25 +6,28 @@ import db.Dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.PrimitiveIterator;
 
-public class ClientDao implements Dao<Client> {
-    private ArrayList<Client> clients = new ArrayList<>();
-    private static ClientDao singelton = null;
+public class AdminDao implements Dao<Admin> {
+    private ArrayList<Admin> admins = new ArrayList<>();
+    private static AdminDao singelton = null;
 
-    private ClientDao() {
-        clients = getTable();
+    private AdminDao()
+    {
+        admins = getTable();
     }
 
-    public static ClientDao getInstance()
-    {
+    public static AdminDao getInstance(){
         if(singelton == null)
-            singelton = new ClientDao();
+        {
+            singelton = new AdminDao();
+        }
         return singelton;
     }
 
 
     @Override
-    public Client rowToObject(ResultSet res) {
+    public Admin rowToObject(ResultSet res) {
         try{
             int id = res.getInt("id");
             String fName = res.getString("fName");
@@ -34,9 +37,9 @@ public class ClientDao implements Dao<Client> {
             String username = res.getString("username");
             String password = res.getString("password");
 
-            Card card = new Card();
+            int update = res.getInt("update");
 
-            return new Client(id,fName,lName,email,phone,username,password,card);
+            return new Admin(id,fName,lName,email,phone,username,password,update);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -45,67 +48,69 @@ public class ClientDao implements Dao<Client> {
     }
 
     @Override
-    public Client getById(int id) {
+    public Admin getById(int id) {
         return null;
     }
 
     @Override
-    public ArrayList<Client> getTable() {
-        ArrayList<Client> listClient = new ArrayList<>();
+    public ArrayList<Admin> getTable() {
+        ArrayList<Admin> listAdmins = new ArrayList<>();
         try{
-            String query = "select * from client";
+            String query = "select * from admin";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next())
             {
-                Client client = rowToObject(resultSet);
-                listClient.add(client);
+                Admin admin = rowToObject(resultSet);
+                listAdmins.add(admin);
             }
         }catch (Exception e){
             e.printStackTrace();
         }
-        return listClient;
+        return listAdmins;
     }
 
     @Override
-    public int insert(Client client) {
-        if(client == null)
+    public int insert(Admin admin) {
+        if(admin == null)
             return -1;
-        clients.add(client);
+        admins.add(admin);
         try{
             String query = "insert into client(id,fName,lName,email" +
-                    ",phone,username,password) values " +
-                    "(?,?,?,?,?,?,?)";
+                    ",phone,username,password,update) values " +
+                    "(?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
-            preparedStatement.setInt(1,client.getId());
+            preparedStatement.setInt(1,admin.getId());
             preparedStatement.setString(2,
-                    client.getlName());
+                    admin.getlName());
             preparedStatement.setString(3,
-                    client.getfName());
+                    admin.getfName());
             preparedStatement.setString(4,
-                    client.getEmail());
+                    admin.getEmail());
             preparedStatement.setString(5,
-                    client.getPhone());
+                    admin.getPhone());
             preparedStatement.setString(6,
-                    client.getUsername());
+                    admin.getUsername());
             preparedStatement.setString(7,
-                    client.getPassword());
+                    admin.getPassword());
+            preparedStatement.setInt(8,
+                    admin.getUpdate());
 
         }catch (Exception e){
             e.printStackTrace();
         }
-        return client.getId();
+        return admin.getId();
     }
 
     @Override
-    public int update(Client client) {
+    public int update(Admin admin) {
         return 0;
     }
 
     @Override
-    public void delete(Client client) {
+    public void delete(Admin admin) {
 
     }
 }
