@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.PrimitiveIterator;
 
 public class AdminDao implements Dao<Admin> {
-    private ArrayList<Admin> admins = new ArrayList<>();
+    private static ArrayList<Admin> admins = new ArrayList<>();
     private static AdminDao singelton = null;
 
     private AdminDao()

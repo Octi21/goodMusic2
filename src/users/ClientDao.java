@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class ClientDao implements Dao<Client> {
-    private ArrayList<Client> clients = new ArrayList<>();
+    private static ArrayList<Client> clients = new ArrayList<>();
     private static ClientDao singelton = null;
 
     private ClientDao() {
