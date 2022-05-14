@@ -29,8 +29,9 @@ public class AuxAddDao implements Dao<AuxAdd> {
             int idAdd = res.getInt("idAdd");
             int idSong = res.getInt("idSong");
             int idPlaylist = res.getInt("idPlaylist");
+            int idClient = res.getInt("idClient");
 
-            return new AuxAdd(idAdd,idSong,idPlaylist);
+            return new AuxAdd(idAdd,idSong,idPlaylist,idClient);
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -67,13 +68,14 @@ public class AuxAddDao implements Dao<AuxAdd> {
             return -1;
         auxAdds.add(auxAdd);
         try{
-            String query ="insert into auxAdd(idSong,idPlaylist) " +
-                    "values(?,?);";
+            String query ="insert into auxAdd(idAdd,idSong,idPlaylist,idClient) " +
+                    "values(?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,auxAdd.getIdAdd());
             preparedStatement.setInt(2,auxAdd.getIdSong());
             preparedStatement.setInt(3,auxAdd.getIdPlaylist());
+            preparedStatement.setInt(4,auxAdd.getIdClient());
             preparedStatement.executeUpdate();
 
         }catch (Exception e){

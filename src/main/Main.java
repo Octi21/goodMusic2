@@ -1,45 +1,104 @@
 package main;
 
-//import  start.*;
 
-import services.Service;
-import card.Card;
-//import start.Client;
+import album.Album;
+import album.AlbumDao;
+import song.Song;
+import song.SongDao;
+import song.SongService;
 import users.*;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        // write your code here
-        System.out.println("ghe");
-        String number = "1234 2345 1234 2345",holderName = "Andrei Ghe";
-        int cvv = 123;
-        Date expDate = new Date(2022, Calendar.DECEMBER,3);
-        String iBan = "RO12300000GHE123";
-        Card card = new Card(1,number,holderName,cvv,expDate,iBan,-1);
-        int id = 1;
-        String fName = "Andrei", lName = "Ghe";
-        String email= "andreighe123@gmail.com", phone="0766602121";
 
-        Client client = new Client(fName,lName,email,phone,"Andrei",
-                "123",card);
+        ArrayList <Song> songs = new ArrayList<>();
+        songs = SongDao.getInstance().getTable();
 
-        System.out.println(client);
+        SongService songService = new SongService(songs);
+//        System.out.println(songs);
+        System.out.println("Songs:");
+        for(Song elem: songs)
+        {
+            System.out.println(elem);
+        }
+
+        ArrayList <Album> albums = new ArrayList<>();
+        albums = AlbumDao.getInstance().getTable();
+        System.out.println("Albums:");
+        for(Album elem: albums)
+        {
+            System.out.println(elem);
+        }
 
 
-//        String nume = new String("andrei");
-//        if(nume.equals("andrei"))
-//            System.out.println(true);
+
+        ArrayList <Client> clients = new ArrayList<Client>();
+        clients = ClientDao.getInstance().getTable();
+        ClientService clientService = new ClientService(clients);
+
+        System.out.println("Clients:");
+        for(Client elem: clients)
+        {
+            System.out.println(elem);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true)
+        {
+            System.out.println("1. login");
+            System.out.println("2. create");
+            System.out.println("3. exit");
+
+            int opt = scanner.nextInt();
+
+            if(opt == 1)
+            {
+                System.out.print("username/email: ");
+                String username = scanner.next();
+                System.out.print("password: ");
+                String password = scanner.next();
+                System.out.println(username);
+                System.out.println(password);
+
+                while(clientService.login(username,password) != 1)
+                {
+                    if(clientService.login(username,password) == -1)
+                        System.out.println("wrong password");
+                    else
+                        System.out.println("try again");
+                    System.out.print("username/email: ");
+                    username = scanner.next();
+                    System.out.print("password: ");
+                    password = scanner.next();
+                }
 
 
-//        Service serv = new Service();
 
-        Service.creareUser();
-        Service.creareUser();
+            }
+            else if(opt == 2)
+            {
+                System.out.println("register: ");
+                Client client = clientService.register();
+                clients.add(client);
+                System.out.println(client);
+                break;
+            }
+            else if(opt == 3)
+            {
+                System.out.println("bye");
+                break;
+            }
+            else
+            {
+                System.out.println("type again");
+            }
 
-        System.out.println(Service.getUs());
+        }
+
     }
 }
