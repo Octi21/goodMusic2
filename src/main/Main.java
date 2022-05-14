@@ -3,6 +3,12 @@ package main;
 
 import album.Album;
 import album.AlbumDao;
+import card.Card;
+import card.CardDao;
+import card.CardService;
+import playlist.Playlist;
+import playlist.PlaylistDao;
+import playlist.PlaylistService;
 import song.Song;
 import song.SongDao;
 import song.SongService;
@@ -14,18 +20,18 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-
+            //   songs
         ArrayList <Song> songs = new ArrayList<>();
         songs = SongDao.getInstance().getTable();
-
         SongService songService = new SongService(songs);
-//        System.out.println(songs);
         System.out.println("Songs:");
         for(Song elem: songs)
         {
             System.out.println(elem);
         }
 
+
+            //   albums
         ArrayList <Album> albums = new ArrayList<>();
         albums = AlbumDao.getInstance().getTable();
         System.out.println("Albums:");
@@ -34,17 +40,26 @@ public class Main {
             System.out.println(elem);
         }
 
+        ArrayList <Playlist> playlists =
+                PlaylistDao.getInstance().getTable();
+        PlaylistService playlistService = new PlaylistService(playlists);
 
+
+        ArrayList <Admin> admins = AdminDao.getInstance().getTable();
+        AdminService adminService = new AdminService(admins);
 
         ArrayList <Client> clients = new ArrayList<Client>();
         clients = ClientDao.getInstance().getTable();
         ClientService clientService = new ClientService(clients);
-
         System.out.println("Clients:");
         for(Client elem: clients)
         {
             System.out.println(elem);
         }
+
+        ArrayList <Card> cards = CardDao.getInstance().getTable();
+        CardService cardService = new CardService(cards);
+
 
         Scanner scanner = new Scanner(System.in);
 
