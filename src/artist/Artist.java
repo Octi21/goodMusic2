@@ -59,13 +59,25 @@ public class Artist {
 
     @Override
     public String toString() {
+        String aux = "";
+        for (Album elem : albums)
+        {
+            aux += elem.toStringghe();
+        }
+
+        String aux2 = "";
+        for (Song elem : songs)
+        {
+            aux2 += elem.toStringghe();
+        }
+
         return "Artist{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", nrSongs=" + nrSongs +
                 ", nrAlbums=" + nrAlbums +
-                ", songs=" + songs +
-                ", albums=" + albums +
+                ", songs=" + aux2 +
+                ", albums=" + aux +
                 '}';
     }
 

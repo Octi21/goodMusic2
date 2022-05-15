@@ -2,6 +2,7 @@ package album;
 
 import db.Dao;
 import song.Song;
+import song.SongDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -44,6 +45,27 @@ public class AlbumDao implements Dao<Album> {
         return albumList;
     }
 
+    public ArrayList<Album> albumByIdArtist(int idArtist)
+    {
+        ArrayList <Album> albumList  = new ArrayList<>();
+        try{
+            String query = "select al.* from album al , artist ar" +
+                    " where al.idArtist = ? ;";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1, idArtist);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next())
+            {
+                Album album = rowToObject(resultSet);
+                albumList.add(album);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return albumList;
+    }
+
     @Override
     public Album rowToObject(ResultSet resultSet) {
         try {
@@ -52,7 +74,9 @@ public class AlbumDao implements Dao<Album> {
             String artistName = resultSet.getString(
                     "artistName");
             int nrSongs = resultSet.getInt("nrSongs");
+
             ArrayList<Song> songs = new ArrayList<>();
+            songs = SongDao.getInstance().songIdAlbum(id);
 
             int nrStreams = resultSet.getInt("nrStreams");
             int idArtist = resultSet.getInt("idArtist");

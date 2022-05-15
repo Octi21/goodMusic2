@@ -70,6 +70,28 @@ public class SongDao implements Dao<Song> {
         return songList;
     }
 
+    public ArrayList<Song> songIdArtist(int idArtist) {
+        ArrayList<Song> songList = new ArrayList<>();
+
+        try {
+            String query = "select s.*  from song s, artist a " +
+                    "where s.idArtist = ? ;";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1, idArtist);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Song song= rowToObject(resultSet);
+                songList.add(song);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return songList;
+    }
+
 
     @Override
     public Song rowToObject(ResultSet resultSet)

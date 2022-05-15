@@ -44,8 +44,8 @@ public class Main {
         System.out.println("Albums:");
         for(Album elem: albums)
         {
-            ArrayList <Song> songs1 = SongDao.getInstance().songIdAlbum(elem.getId());
-            elem.setListSongs(songs1);
+//            ArrayList <Song> songs1 = SongDao.getInstance().songIdAlbum(elem.getId());
+//            elem.setListSongs(songs1);
 
             System.out.println(elem);
         }

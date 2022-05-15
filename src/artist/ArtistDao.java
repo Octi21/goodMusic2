@@ -1,7 +1,10 @@
 package artist;
 
+import album.Album;
 import album.AlbumDao;
 import db.Dao;
+import song.Song;
+import song.SongDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -52,8 +55,14 @@ public class ArtistDao implements Dao<Artist> {
             int nrSongs = res.getInt("nrSongs");
             int nrAlbums = res.getInt("nrAlbums");
 
+            ArrayList<Album> albums = new ArrayList<>();
+            albums = AlbumDao.getInstance().albumByIdArtist(id);
+
+            ArrayList<Song> songs = new ArrayList<>();
+            songs = SongDao.getInstance().songIdArtist(id);
+
             // cum la liste ?
-            return new Artist(id,name,nrSongs,nrAlbums,null,null);
+            return new Artist(id,name,nrSongs,nrAlbums,songs,albums);
         }catch (Exception e){
             e.printStackTrace();
             return null;

@@ -71,6 +71,13 @@ public class Song {
                 '}';
     }
 
+    public String toStringghe() {
+        return " (" +
+                "id=" + id +
+                ", name='" + name + "') ";
+
+    }
+
     public int getId() {
         return id;
     }

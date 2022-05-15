@@ -66,15 +66,27 @@ public class Album {
 
     @Override
     public String toString() {
+        String aux = "";
+        for (Song elem: listSongs)
+        {
+            aux += elem.toStringghe();
+        }
         return "Album{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", artistName='" + artistName + '\'' +
                 ", numberSongs=" + numberSongs +
-                ", listSongs=" + listSongs +
+                ", listSongs= " + aux +
                 ", nrStreams=" + nrStreams +
                 '}';
     }
+
+    public String toStringghe(){
+        return "Album{" +
+                "id=" + id +
+                ", name='" + name + "'}";
+    }
+
 
     public static int getAux() {
         return aux;
