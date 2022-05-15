@@ -48,6 +48,29 @@ public class SongDao implements Dao<Song> {
 
     }
 
+    public ArrayList<Song> songIdAlbum(int idAlbum) {
+        ArrayList<Song> songList = new ArrayList<>();
+
+        try {
+            String query = "select s.*  from song s, album a " +
+                    "where s.idAlbum = ? ;";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1, idAlbum);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Song song= rowToObject(resultSet);
+                songList.add(song);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return songList;
+    }
+
+
     @Override
     public Song rowToObject(ResultSet resultSet)
     {

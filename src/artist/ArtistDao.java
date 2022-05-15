@@ -35,7 +35,7 @@ public class ArtistDao implements Dao<Artist> {
             while(resultSet.next())
             {
                 Artist artist = rowToObject(resultSet);
-                artists.add(artist);
+                artistList.add(artist);
             }
         }catch (Exception e){
             e.printStackTrace();
