@@ -1,5 +1,6 @@
 package card;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class Card {
@@ -8,12 +9,12 @@ public class Card {
     protected int id;
     protected String number,holderName;
     protected int cvv;
-    protected Date expDate;
+    protected LocalDate expDate;
     protected int suma;
 
     protected int idClient;
 
-    public Card(int id, String number, String holderName, int cvv, Date expDate, int suma, int idClient) {
+    public Card(int id, String number, String holderName, int cvv, LocalDate expDate, int suma, int idClient) {
         this.id = id;
         this.number = number;
         this.holderName = holderName;
@@ -24,7 +25,7 @@ public class Card {
         this.idClient = idClient;
     }
 
-    public Card(String number, String holderName, int cvv, Date expDate, int suma, int idClient) {
+    public Card(String number, String holderName, int cvv, LocalDate expDate, int suma, int idClient) {
         this.number = number;
         this.holderName = holderName;
         this.cvv = cvv;
@@ -42,7 +43,7 @@ public class Card {
         this.number = "";
         this.holderName = "";
         this.cvv = -1;
-        this.expDate = new Date();
+        this.expDate = LocalDate.parse("2000-02-02");
         this.suma = 0;
 
         this.idClient = -1;
@@ -88,11 +89,11 @@ public class Card {
         this.cvv = cvv;
     }
 
-    public Date getExpDate() {
-        return expDate;
+    public String getExpDate() {
+        return expDate.toString();
     }
 
-    public void setExpDate(Date expDate) {
+    public void setExpDate(LocalDate expDate) {
         this.expDate = expDate;
     }
 

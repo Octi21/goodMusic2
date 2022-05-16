@@ -1,10 +1,13 @@
 package users;
 
 import card.Card;
+import card.CardDao;
 import db.Dao;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ClientDao implements Dao<Client> {
@@ -23,6 +26,8 @@ public class ClientDao implements Dao<Client> {
     }
 
 
+
+
     @Override
     public Client rowToObject(ResultSet res) {
         try{
@@ -34,9 +39,12 @@ public class ClientDao implements Dao<Client> {
             String username = res.getString("username");
             String password = res.getString("password");
 
-            Card card = new Card();
+            Date dateString= res.getDate("date");
+            LocalDate date= LocalDate.parse(dateString.toString());
 
-            return new Client(id,fName,lName,email,phone,username,password,card);
+            Card card =  CardDao.getInstance().getByClient(id);
+
+            return new Client(id,fName,lName,email,phone,username,password,card,date);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -75,8 +83,8 @@ public class ClientDao implements Dao<Client> {
         clients.add(client);
         try{
             String query = "insert into client(id,fName,lName,email" +
-                    ",phone,username,password) values " +
-                    "(?,?,?,?,?,?,?);";
+                    ",phone,username,password,date) values " +
+                    "(?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,client.getId());
@@ -92,6 +100,7 @@ public class ClientDao implements Dao<Client> {
                     client.getUsername());
             preparedStatement.setString(7,
                     client.getPassword());
+            preparedStatement.setString(8,client.getDate());
 
             preparedStatement.executeUpdate();
 

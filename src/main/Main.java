@@ -86,6 +86,11 @@ public class Main {
 
         ArrayList <Card> cards = CardDao.getInstance().getTable();
         CardService cardService = new CardService(cards);
+        System.out.println("Cards:");
+        for(Card elem: cards)
+        {
+            System.out.println(elem);
+        }
 
 
         Scanner scanner = new Scanner(System.in);
