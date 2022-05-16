@@ -34,11 +34,11 @@ public class CardDao implements Dao<Card> {
             String holderName = res.getString("holderName");
             int cvv = res.getInt("cvv");
             Date expDate = res.getDate("expDate");
-            String iBan = res.getString("iBan");
+            int suma = res.getInt("suma");
 
             int idClient = res.getInt("idClient");
 
-            return new Card(id,number,holderName,cvv,expDate,iBan,idClient);
+            return new Card(id,number,holderName,cvv,expDate,suma,idClient);
         }catch (Exception e){
             e.printStackTrace();
             return null;
@@ -88,8 +88,8 @@ public class CardDao implements Dao<Card> {
             preparedStatement.setInt(4,card.getCvv());
             preparedStatement.setDate(5,
                     (java.sql.Date) card.getExpDate());
-            preparedStatement.setString(6,
-                    card.getiBan());
+            preparedStatement.setInt(6,
+                    card.getSuma());
             preparedStatement.setInt(7,card.getIdClient());
 
             preparedStatement.executeUpdate();

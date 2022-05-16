@@ -9,27 +9,27 @@ public class Card {
     protected String number,holderName;
     protected int cvv;
     protected Date expDate;
-    protected String iBan;
+    protected int suma;
 
     protected int idClient;
 
-    public Card(int id, String number, String holderName, int cvv, Date expDate, String iBan, int idClient) {
+    public Card(int id, String number, String holderName, int cvv, Date expDate, int suma, int idClient) {
         this.id = id;
         this.number = number;
         this.holderName = holderName;
         this.cvv = cvv;
         this.expDate = expDate;
-        this.iBan = iBan;
+        this.suma = suma;
 
         this.idClient = idClient;
     }
 
-    public Card(String number, String holderName, int cvv, Date expDate, String iBan, int idClient) {
+    public Card(String number, String holderName, int cvv, Date expDate, int suma, int idClient) {
         this.number = number;
         this.holderName = holderName;
         this.cvv = cvv;
         this.expDate = expDate;
-        this.iBan = iBan;
+        this.suma = suma;
 
         aux += 1;
         this.id = aux;
@@ -43,7 +43,7 @@ public class Card {
         this.holderName = "";
         this.cvv = -1;
         this.expDate = new Date();
-        this.iBan = "";
+        this.suma = 0;
 
         this.idClient = -1;
     }
@@ -96,12 +96,12 @@ public class Card {
         this.expDate = expDate;
     }
 
-    public String getiBan() {
-        return iBan;
+    public int getSuma() {
+        return suma;
     }
 
-    public void setiBan(String iBan) {
-        this.iBan = iBan;
+    public void setSuma(int suma) {
+        this.suma = suma;
     }
 
     public int getIdClient() {
@@ -119,7 +119,7 @@ public class Card {
                 ", holderName='" + holderName + '\'' +
                 ", cvv=" + cvv +
                 ", expDate=" + expDate +
-                ", iBan='" + iBan + '\'' +
+                ", iBan='" + suma + '\'' +
                 '}';
     }
 }
