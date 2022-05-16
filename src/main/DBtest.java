@@ -58,6 +58,7 @@ public class DBtest {
 
         System.out.println(date.isEqual(LocalDate.parse("2000-11-24")));
         System.out.println(date.plusMonths(1));
+        System.out.println(date.plusMonths(1));
 
 
         System.out.println(date );
