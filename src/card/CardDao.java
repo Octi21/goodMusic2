@@ -87,7 +87,7 @@ public class CardDao implements Dao<Card> {
             while(resultSet.next())
             {
                 Card card = rowToObject(resultSet);
-                cards.add(card);
+                listCard.add(card);
             }
         }catch (Exception e){
             e.printStackTrace();
