@@ -150,6 +150,32 @@ public class Main {
 
                         opt = scanner.nextInt();
 
+                        if(opt == 2) {
+
+                        }
+                        else if (opt == 3) {
+                            int i = 1;
+                            for(Song elem: songs){
+                                System.out.println(i + ". "+ elem.getName());
+                                i +=1;
+                            }
+                            opt = scanner.nextInt();
+
+
+
+
+                        }
+                        else if (opt == 4) {
+                            break;
+                        }
+                        else if (opt == 5) {
+                            System.out.println("bye");
+                            break;
+                        }
+                        else{
+                            System.out.println("try again");
+                        }
+
 
 
                     } else {
@@ -165,10 +191,16 @@ public class Main {
                                     playlistService,client);
                         }
                         else if (opt == 2) {
+                            int i = 1;
+                            for(Song elem: songs){
+                                System.out.println(i + ". "+ elem.getName());
+                                i +=1;
+                            }
+                            opt = scanner.nextInt();
 
                         }
                         else if (opt == 3) {
-
+                            break;
                         }
                         else if (opt == 4) {
                             System.out.println("bye");

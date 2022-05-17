@@ -24,6 +24,15 @@ public class SongService {
         return songs.get(a-1).getId();
     }
 
+    public void listened(int idSong){
+        for(Song elem: songs )
+        {
+            if (elem.getId() == idSong)
+            {
+                elem.addStream();
+            }
+        }
+    }
 
     public Song CreateSong()
     {
@@ -43,4 +52,11 @@ public class SongService {
         return ob1;
     }
 
+    public ArrayList<Song> getSongs() {
+        return songs;
+    }
+
+    public void setSongs(ArrayList<Song> songs) {
+        this.songs = songs;
+    }
 }
