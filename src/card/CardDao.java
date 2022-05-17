@@ -57,11 +57,8 @@ public class CardDao implements Dao<Card> {
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,idClient);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-
-            card = rowToObject(resultSet);
-
-
+            if(resultSet.next())
+                card = rowToObject(resultSet);
 
         } catch (Exception e) {
             e.printStackTrace();

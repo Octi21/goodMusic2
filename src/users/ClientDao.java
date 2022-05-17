@@ -53,6 +53,7 @@ public class ClientDao implements Dao<Client> {
 
         } catch (Exception e){
             e.printStackTrace();
+            System.out.println("error client");
             return null;
         }
     }
@@ -90,6 +91,7 @@ public class ClientDao implements Dao<Client> {
                 listClient.add(client);
             }
         }catch (Exception e){
+            System.out.println("gh2");
             e.printStackTrace();
         }
         return listClient;

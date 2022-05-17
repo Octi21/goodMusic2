@@ -111,6 +111,7 @@ public class SongDao implements Dao<Song> {
             }
 
         } catch (Exception e){
+            System.out.println("error song in playlist");
             e.printStackTrace();
         }
         return songList;

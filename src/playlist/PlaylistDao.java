@@ -57,9 +57,8 @@ public class PlaylistDao implements Dao<Playlist> {
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,idClient);
             ResultSet resultSet = preparedStatement.executeQuery();
-            resultSet.next();
-
-            playlist = rowToObject(resultSet);
+            if(resultSet.next())
+                playlist = rowToObject(resultSet);
 
         } catch (Exception e){
             e.printStackTrace();

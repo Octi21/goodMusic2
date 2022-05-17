@@ -120,7 +120,7 @@ public class Card {
                 ", holderName='" + holderName + '\'' +
                 ", cvv=" + cvv +
                 ", expDate=" + expDate +
-                ", iBan='" + suma + '\'' +
+                ", suma='" + suma + '\'' +
                 '}';
     }
 }

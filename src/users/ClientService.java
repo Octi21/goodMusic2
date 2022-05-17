@@ -2,6 +2,7 @@ package users;
 
 import card.Card;
 import playlist.Playlist;
+import playlist.PlaylistService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -54,6 +55,13 @@ public class ClientService {
 
         ClientDao.getInstance().insert(client);
         return client;
+    }
+
+    public void createPlaylist(PlaylistService playlistService,
+                               Client client)
+    {
+       Playlist playlist = playlistService.create(client.getId());
+       client.setPlaylist(playlist);
     }
 
 

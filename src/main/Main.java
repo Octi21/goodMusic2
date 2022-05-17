@@ -66,15 +66,21 @@ public class Main {
         ArrayList <Playlist> playlists =
                 PlaylistDao.getInstance().getTable();
         PlaylistService playlistService = new PlaylistService(playlists);
+        System.out.println("Playlists:");
+        for(Playlist elem: playlists)
+        {
+            System.out.println(elem);
+        }
 
             //   adds
         ArrayList <AuxAdd> adds =
                 AuxAddDao.getInstance().getTable();
 
-
+            //  admin
         ArrayList <Admin> admins = AdminDao.getInstance().getTable();
         AdminService adminService = new AdminService(admins);
 
+            // clients
         ArrayList <Client> clients = new ArrayList<Client>();
         clients = ClientDao.getInstance().getTable();
         ClientService clientService = new ClientService(clients);
@@ -84,6 +90,7 @@ public class Main {
             System.out.println(elem);
         }
 
+            // cards
         ArrayList <Card> cards = CardDao.getInstance().getTable();
         CardService cardService = new CardService(cards);
         System.out.println("Cards:");
@@ -91,6 +98,7 @@ public class Main {
         {
             System.out.println(elem);
         }
+
 
 
         Scanner scanner = new Scanner(System.in);
@@ -127,8 +135,50 @@ public class Main {
 
                 System.out.println("welcome " + username);
                 System.out.println(clientService.login(username,password));
-                Client client = ClientDao.getInstance().getById(clientService.login(username,password));
+                Client client = ClientDao.getInstance()
+                        .getById(clientService.login(username,password));
                 System.out.println(client);
+
+                while(true)
+                {
+                    if (client.getPlaylist().getName().length() != 0) {
+                        System.out.println("1. Add song to playlist");
+                        System.out.println("2. play playlist");
+                        System.out.println("3. play song");
+                        System.out.println("4. play album");
+                        System.out.println("5. exit");
+
+                        opt = scanner.nextInt();
+
+
+
+                    } else {
+                        System.out.println("1. Create playlist");
+                        System.out.println("2. play song");
+                        System.out.println("3. play album");
+                        System.out.println("4. exit");
+
+                        opt = scanner.nextInt();
+
+                        if(opt == 1) {
+                            clientService.createPlaylist(
+                                    playlistService,client);
+                        }
+                        else if (opt == 2) {
+
+                        }
+                        else if (opt == 3) {
+
+                        }
+                        else if (opt == 4) {
+                            System.out.println("bye");
+                            break;
+                        }
+                        else{
+                            System.out.println("try again");
+                        }
+                    }
+                }
 
 
 
@@ -140,7 +190,7 @@ public class Main {
                 Client client = clientService.register();
                 clients.add(client);
                 System.out.println(client);
-                break;
+                System.out.println("Account created go and loggin");
             }
             else if(opt == 3)
             {
