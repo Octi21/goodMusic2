@@ -92,6 +92,30 @@ public class SongDao implements Dao<Song> {
         return songList;
     }
 
+    public ArrayList<Song> songIdPlaylist(int idClient) {
+        ArrayList<Song> songList = new ArrayList<>();
+
+        try {
+            String query = "select s.* from client c, playlist p, " +
+                    "auxAdd a, song s where p.idClient = ? and p.id " +
+                    "= a.idPlaylist and a.idSong = s.id;";
+
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1, idClient);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next())
+            {
+                Song song= rowToObject(resultSet);
+                songList.add(song);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return songList;
+    }
+
 
     @Override
     public Song rowToObject(ResultSet resultSet)

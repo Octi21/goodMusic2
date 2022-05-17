@@ -3,6 +3,9 @@ package users;
 import card.Card;
 import card.CardDao;
 import db.Dao;
+import playlist.Playlist;
+import playlist.PlaylistDao;
+import song.SongDao;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -43,8 +46,10 @@ public class ClientDao implements Dao<Client> {
             LocalDate date= LocalDate.parse(dateString.toString());
 
             Card card =  CardDao.getInstance().getByClient(id);
+            Playlist playlist = PlaylistDao.getInstance().getPlaylistByClient(id);
 
-            return new Client(id,fName,lName,email,phone,username,password,card,date);
+            return new Client(id,fName,lName,email,phone,username,password,
+                    card,date,playlist);
 
         } catch (Exception e){
             e.printStackTrace();
@@ -54,7 +59,21 @@ public class ClientDao implements Dao<Client> {
 
     @Override
     public Client getById(int id) {
-        return null;
+//        Client client = new Client();
+        try{
+            String query = "select * from client where id = ?;";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            Client client = rowToObject(resultSet);
+
+            return client;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 
     @Override

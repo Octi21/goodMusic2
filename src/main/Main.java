@@ -110,10 +110,10 @@ public class Main {
                 String username = scanner.next();
                 System.out.print("password: ");
                 String password = scanner.next();
-                System.out.println(username);
-                System.out.println(password);
+//                System.out.println(username);
+//                System.out.println(password);
 
-                while(clientService.login(username,password) != 1)
+                while(clientService.login(username,password) <= 0)
                 {
                     if(clientService.login(username,password) == -1)
                         System.out.println("wrong password");
@@ -124,6 +124,12 @@ public class Main {
                     System.out.print("password: ");
                     password = scanner.next();
                 }
+
+                System.out.println("welcome " + username);
+                System.out.println(clientService.login(username,password));
+                Client client = ClientDao.getInstance().getById(clientService.login(username,password));
+                System.out.println(client);
+
 
 
 

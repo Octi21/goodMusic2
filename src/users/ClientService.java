@@ -1,6 +1,7 @@
 package users;
 
 import card.Card;
+import playlist.Playlist;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -45,8 +46,10 @@ public class ClientService {
         String password = scanner.next();
 
         Card card = new Card();
+        Playlist playlist = new Playlist();
 
-        Client client = new Client(fName,lName,email,phone,username,password,card);
+        Client client = new Client(fName,lName,email,phone,username,
+                password,card,playlist);
         clients.add(client);
 
         ClientDao.getInstance().insert(client);
@@ -67,8 +70,8 @@ public class ClientService {
                 if(elem.getPassword().equals(password))
                 {
                     ok2 = 1;
-                    System.out.println("logged");
-                    return 1;
+//                    System.out.println("logged");
+                    return elem.getId();
                 }
             }
         }

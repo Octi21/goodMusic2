@@ -4,6 +4,7 @@ import album.Album;
 import album.AlbumDao;
 import db.Dao;
 import song.Song;
+import song.SongDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +47,28 @@ public class PlaylistDao implements Dao<Playlist> {
         return playlistList;
     }
 
+    public Playlist getPlaylistByClient(int idClient)
+    {
+        Playlist playlist = new Playlist();
+        try{
+            String query = "select p.* from client c , playlist p " +
+                    "where p.idClient = ?;";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,idClient);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+
+            playlist = rowToObject(resultSet);
+
+        } catch (Exception e){
+            e.printStackTrace();
+            System.out.println("ghe");
+        }
+        return playlist;
+    }
+
+
     @Override
     public Playlist rowToObject(ResultSet resultSet) {
         try {
@@ -55,9 +78,11 @@ public class PlaylistDao implements Dao<Playlist> {
                     "creatorName");
             int nrSongs = resultSet.getInt("nrSongs");
 
-            ArrayList<Song> songs = new ArrayList<>();
 
             int idClient = resultSet.getInt("idClient");
+
+            ArrayList<Song> songs = SongDao.getInstance().songIdPlaylist(idClient);
+//            ArrayList<Song> songs = new ArrayList<>();
 
             // ce fac cu nr streams ?
             return new Playlist(id,name,creatorName,nrSongs,songs
