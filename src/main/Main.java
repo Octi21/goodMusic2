@@ -29,12 +29,16 @@ public class Main {
             //   songs
         ArrayList <Song> songs = new ArrayList<>();
         songs = SongDao.getInstance().getTable();
-        SongService songService = new SongService(songs);
+        SongService songService = SongService.getInstance();
         System.out.println("Songs:");
         for(Song elem: songs)
         {
             System.out.println(elem);
         }
+//        for(Song elem: songService.getSongs())
+//        {
+//            System.out.println(elem);
+//        }
 
 
             //   albums
@@ -92,7 +96,7 @@ public class Main {
 
             // cards
         ArrayList <Card> cards = CardDao.getInstance().getTable();
-        CardService cardService = new CardService(cards);
+        CardService cardService =  CardService.getInstance();
         System.out.println("Cards:");
         for(Card elem: cards)
         {
@@ -154,16 +158,16 @@ public class Main {
 
                         }
                         else if (opt == 3) {
-                            int i = 1;
-                            for(Song elem: songs){
-                                System.out.println(i + ". "+ elem.getName());
-                                i +=1;
+                            clientService.playSong();
+
+                            for(Song elem: songs)
+                            {
+                                System.out.println(elem);
                             }
-                            opt = scanner.nextInt();
-
-
-
-
+                            for(Song elem: songService.getSongs())
+                            {
+                                System.out.println(elem);
+                            }
                         }
                         else if (opt == 4) {
                             break;
@@ -191,12 +195,7 @@ public class Main {
                                     playlistService,client);
                         }
                         else if (opt == 2) {
-                            int i = 1;
-                            for(Song elem: songs){
-                                System.out.println(i + ". "+ elem.getName());
-                                i +=1;
-                            }
-                            opt = scanner.nextInt();
+                            clientService.playSong();
 
                         }
                         else if (opt == 3) {

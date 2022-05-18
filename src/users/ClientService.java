@@ -1,8 +1,11 @@
 package users;
 
 import card.Card;
+import card.CardService;
 import playlist.Playlist;
 import playlist.PlaylistService;
+import song.Song;
+import song.SongService;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +49,7 @@ public class ClientService {
         System.out.println("password: ");
         String password = scanner.next();
 
-        Card card = new Card();
+        Card card = CardService.getInstance().create(getLastId() + 1);
         Playlist playlist = new Playlist();
 
         Client client = new Client(fName,lName,email,phone,username,
@@ -86,6 +89,22 @@ public class ClientService {
         if(ok != 0)
             return -1;
         return 0;
+    }
+
+    public void playSong()
+    {
+        int i = 1;
+        for(Song elem: SongService.getInstance().getSongs()){
+            System.out.println(i + ". "+ elem.getName());
+            i +=1;
+        }
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+
+        SongService.getInstance().listened(
+                SongService.getInstance().getSongs().get(opt - 1).getId());
+
+
     }
 
 

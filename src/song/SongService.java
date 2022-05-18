@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class SongService {
-    ArrayList <Song> songs;
+    private static ArrayList <Song> songs = new ArrayList<>();
+    private static SongService singelton = null;
 
-    public SongService()
+    private SongService()
     {
-        songs = new ArrayList<>();
+        songs = SongDao.getInstance().getTable();
     }
 
-    public SongService(ArrayList<Song> songs)
-    {
-        this.songs =  songs;
+    public static SongService getInstance() {
+        if(singelton == null)
+            singelton = new SongService();
+        return singelton;
     }
 
     public int lastId()
@@ -29,7 +31,12 @@ public class SongService {
         {
             if (elem.getId() == idSong)
             {
+                System.out.println("listed to " + elem.getName());
+
                 elem.addStream();
+                SongDao.getInstance().update(elem);
+
+                break;
             }
         }
     }

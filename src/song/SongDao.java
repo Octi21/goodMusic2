@@ -179,7 +179,27 @@ public class SongDao implements Dao<Song> {
 
     @Override
     public int update(Song song){
-        return 0;
+        if (song == null)
+            return -1;
+        try{
+            String query = "update song set streamNr = ? where id = ?";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,song.getStreamNr());
+            preparedStatement.setInt(2,song.getId());
+            preparedStatement.executeUpdate();
+            for(Song elem: songs)
+            {
+                if (elem.getId() == song.getId())
+                {
+                    elem.setStreamNr(song.getStreamNr());
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return song.getId();
     }
     @Override
     public void delete(Song song){
