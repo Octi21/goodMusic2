@@ -44,7 +44,7 @@ public class Main {
             //   albums
         ArrayList <Album> albums = new ArrayList<>();
         albums = AlbumDao.getInstance().getTable();
-        AlbumService albumService = new AlbumService(albums);
+        AlbumService albumService =  AlbumService.getInstance();
         System.out.println("Albums:");
         for(Album elem: albums)
         {
@@ -118,30 +118,31 @@ public class Main {
 
             if(opt == 1)
             {
-                System.out.print("username/email: ");
-                String username = scanner.next();
-                System.out.print("password: ");
-                String password = scanner.next();
-//                System.out.println(username);
-//                System.out.println(password);
-
-                while(clientService.login(username,password) <= 0)
-                {
-                    if(clientService.login(username,password) == -1)
-                        System.out.println("wrong password");
-                    else
-                        System.out.println("try again");
-                    System.out.print("username/email: ");
-                    username = scanner.next();
-                    System.out.print("password: ");
-                    password = scanner.next();
-                }
-
-                System.out.println("welcome " + username);
-                System.out.println(clientService.login(username,password));
-                Client client = ClientDao.getInstance()
-                        .getById(clientService.login(username,password));
-                System.out.println(client);
+                Client client = clientService.log();
+//                System.out.print("username/email: ");
+//                String username = scanner.next();
+//                System.out.print("password: ");
+//                String password = scanner.next();
+////                System.out.println(username);
+////                System.out.println(password);
+//
+//                while(clientService.login(username,password) <= 0)
+//                {
+//                    if(clientService.login(username,password) == -1)
+//                        System.out.println("wrong password");
+//                    else
+//                        System.out.println("try again");
+//                    System.out.print("username/email: ");
+//                    username = scanner.next();
+//                    System.out.print("password: ");
+//                    password = scanner.next();
+//                }
+//
+//                System.out.println("welcome " + username);
+//                System.out.println(clientService.login(username,password));
+//                Client client = ClientDao.getInstance()
+//                        .getById(clientService.login(username,password));
+//                System.out.println(client);
 
                 while(true)
                 {
@@ -170,7 +171,11 @@ public class Main {
                             }
                         }
                         else if (opt == 4) {
-                            break;
+                            clientService.playAlbum();
+                            for(Album elem: albumService.getAlbums())
+                            {
+                                System.out.println(elem);
+                            }
                         }
                         else if (opt == 5) {
                             System.out.println("bye");

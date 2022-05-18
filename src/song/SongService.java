@@ -63,7 +63,7 @@ public class SongService {
         return songs;
     }
 
-    public void setSongs(ArrayList<Song> songs) {
-        this.songs = songs;
+    public static void setSongs(ArrayList<Song> songs) {
+        SongService.songs = songs;
     }
 }

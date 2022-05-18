@@ -1,5 +1,7 @@
 package users;
 
+import album.Album;
+import album.AlbumService;
 import card.Card;
 import card.CardService;
 import playlist.Playlist;
@@ -91,6 +93,33 @@ public class ClientService {
         return 0;
     }
 
+    public Client log()
+    {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("username/email: ");
+        String username = scanner.next();
+        System.out.print("password: ");
+        String password = scanner.next();
+
+        while (login(username,password) <= 0)
+        {
+            if(login(username,password) == -1)
+                System.out.println("wrong password");
+            else
+                System.out.println("try again");
+            System.out.print("username/email: ");
+            username = scanner.next();
+            System.out.print("password: ");
+            password = scanner.next();
+        }
+
+        Client client = ClientDao.getInstance()
+                .getById(login(username,password));
+        System.out.println(client);
+        return client;
+
+    }
+
     public void playSong()
     {
         int i = 1;
@@ -106,6 +135,23 @@ public class ClientService {
 
 
     }
+
+    public void playAlbum()
+    {
+        int i = 1;
+        for(Album elem: AlbumService.getInstance().getAlbums())
+        {
+            System.out.println(i + ". "+ elem.getName() +
+                    " by " + elem.getArtistName());
+            i += 1;
+        }
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+
+        AlbumService.getInstance().listend(
+                AlbumService.getInstance().getLastId());
+    }
+
 
 
 

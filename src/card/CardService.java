@@ -67,8 +67,8 @@ public class CardService {
         return cards;
     }
 
-    public void setCards(ArrayList<Card> cards) {
-        this.cards = cards;
+    public static void setCards(ArrayList<Card> cards) {
+        CardService.cards = cards;
     }
 }
 
