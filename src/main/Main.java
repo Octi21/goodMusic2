@@ -241,8 +241,11 @@ public class Main {
             {
                 System.out.println("register: ");
                 Client client = clientService.register();
-                clients.add(client);
-                System.out.println(client);
+
+
+                System.out.println(ClientService.getInstance().getClients());
+//                clients.add(client);
+//                System.out.println(client);
                 System.out.println("Account created go and loggin");
             }
             else if(opt == 3)

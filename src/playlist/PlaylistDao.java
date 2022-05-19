@@ -8,6 +8,7 @@ import song.SongDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class PlaylistDao implements Dao<Playlist> {
@@ -134,7 +135,30 @@ public class PlaylistDao implements Dao<Playlist> {
 
     @Override
     public int update(Playlist playlist){
-        return 0;
+        try{
+            String query = "update playlist set nrSongs = ? " +
+                    "where id = ?";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,playlist.getNumberSongs());
+            preparedStatement.setInt(2,
+                    playlist.getId());
+            preparedStatement.executeUpdate();
+
+            for(Playlist elem: playlists)
+            {
+                if(elem.getId() == playlist.getId())
+                {
+                    elem.setNumberSongs(playlist.getNumberSongs());
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+        return playlist.getId();
+
     }
     @Override
     public void delete(Playlist playlist){

@@ -44,6 +44,7 @@ public class ClientService {
     public Client register()
     {
         Client.setAux(getLastId());
+//        System.out.println("aux = " + Client.getAux());
         Scanner scanner = new Scanner(System.in);
         System.out.println("first name: ");
         String fName = scanner.next();
@@ -58,7 +59,8 @@ public class ClientService {
         System.out.println("password: ");
         String password = scanner.next();
 
-        Card card = CardService.getInstance().create(getLastId() + 1);
+        Card card = new Card();
+//        Card card = CardService.getInstance().create(getLastId() + 1);
         Playlist playlist = new Playlist();
 
         Client client = new Client(fName,lName,email,phone,username,
@@ -66,6 +68,10 @@ public class ClientService {
         clients.add(client);
 
         ClientDao.getInstance().insert(client);
+        Card card1 = CardService.getInstance().create(getLastId());
+
+
+        clients = ClientDao.getInstance().getTable();
         return client;
     }
 

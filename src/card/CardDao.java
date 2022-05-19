@@ -98,8 +98,8 @@ public class CardDao implements Dao<Card> {
             return -1;
         cards.add(card);
         try{
-            String query = "insert into card(id,number,holderName" +
-                    "cvv,expDate,iBan,idClient) values(?,?,?,?,?,?,?);";
+            String query = "insert into card(id,number,holderName," +
+                    "cvv,expDate,suma,idClient) values(?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,card.getId());

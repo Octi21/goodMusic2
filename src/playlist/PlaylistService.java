@@ -88,6 +88,9 @@ public class PlaylistService {
         {
             if(elem.getIdClient() == idClient)
             {
+                elem.setNumberSongs(elem.getListSongs().size() + 1);
+                PlaylistDao.getInstance().update(elem);
+
                 idPlaylist = elem.getId();
                 break;
             }
@@ -105,6 +108,8 @@ public class PlaylistService {
         AuxAdd auxAdd = new AuxAdd(idSong,idPlaylist,idClient);
 
         AuxAddDao.getInstance().insert(auxAdd);
+
+
     }
 
 
