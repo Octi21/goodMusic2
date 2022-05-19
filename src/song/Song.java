@@ -74,7 +74,8 @@ public class Song {
     public String toStringghe() {
         return " (" +
                 "id=" + id +
-                ", name='" + name + "') ";
+                ", name='" + name + "' " +
+                ", nrStr=" +  streamNr  +") ";
 
     }
 

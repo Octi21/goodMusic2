@@ -34,20 +34,26 @@ public class AlbumService {
     }
 
 
-    public void listend(int idAlbum)
+    public void listened(int idAlbum)
     {
         for(Album elem : albums)
         {
             if(elem.getId() == idAlbum)
             {
+                int streams = 0;
 
-                System.out.println("listed to Album: " + elem.getName());
+                System.out.println("listening to Album: " + elem.getName());
                 for(Song so: elem.getListSongs())
                 {
                     SongService.getInstance().listened(so.getId());
+                    streams += so.getStreamNr();
                 }
+                elem.setNrStreams(streams);
+                AlbumDao.getInstance().update(elem);
                 break;
             }
+            // !!!!!!!!!!! aici numara cate streamuri are albumul si
+            // verifica daca are streamuri bune pe melodii
         }
     }
 
@@ -55,7 +61,7 @@ public class AlbumService {
         return albums;
     }
 
-    public static void setAlbums(ArrayList<Album> albums) {
+    public void setAlbums(ArrayList<Album> albums) {
         AlbumService.albums = albums;
     }
 

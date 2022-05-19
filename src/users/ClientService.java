@@ -1,6 +1,7 @@
 package users;
 
 import album.Album;
+import album.AlbumDao;
 import album.AlbumService;
 import card.Card;
 import card.CardService;
@@ -14,14 +15,19 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ClientService {
-        private ArrayList<Client> clients;
+        private static ArrayList<Client> clients = new ArrayList<>();
+        private static ClientService singelton = null;
 
-    public ClientService(ArrayList<Client> clients) {
-        this.clients = clients;
+    private ClientService() {
+        clients = ClientDao.getInstance().getTable();
     }
 
-    public ClientService() {
-        this.clients = new ArrayList<>();
+    public static ClientService getInstance() {
+        if( singelton == null)
+        {
+            singelton = new ClientService();
+        }
+        return singelton;
     }
 
     public int getLastId(){
@@ -148,8 +154,11 @@ public class ClientService {
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
 
-        AlbumService.getInstance().listend(
+        AlbumService.getInstance().listened(
                 AlbumService.getInstance().getLastId());
+
+        AlbumService.getInstance().setAlbums(
+                AlbumDao.getInstance().getAlbums());     // brute force update streams
     }
 
 
@@ -159,7 +168,8 @@ public class ClientService {
         return clients;
     }
 
-    public void setClients(ArrayList<Client> clients) {
-        this.clients = clients;
+    public static void setClients(ArrayList<Client> clients)
+    {
+        ClientService.clients = clients;
     }
 }

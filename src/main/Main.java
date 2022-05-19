@@ -87,7 +87,7 @@ public class Main {
             // clients
         ArrayList <Client> clients = new ArrayList<Client>();
         clients = ClientDao.getInstance().getTable();
-        ClientService clientService = new ClientService(clients);
+        ClientService clientService = ClientService.getInstance();
         System.out.println("Clients:");
         for(Client elem: clients)
         {
@@ -110,7 +110,7 @@ public class Main {
         while (true)
         {
             System.out.println("1. login");
-            System.out.println("2. create");
+            System.out.println("2. create account");
             System.out.println("3. exit");
             System.out.println("4. admin");
 
@@ -159,6 +159,8 @@ public class Main {
 
                         }
                         else if (opt == 3) {
+                            System.out.println(AlbumService.getInstance().getAlbums());
+                            System.out.println(AlbumDao.getInstance().getAlbums());
                             clientService.playSong();
 
                             for(Song elem: songs)
@@ -169,8 +171,12 @@ public class Main {
                             {
                                 System.out.println(elem);
                             }
+                            System.out.println(AlbumService.getInstance().getAlbums());
+                            System.out.println(AlbumDao.getInstance().getAlbums());
+
                         }
                         else if (opt == 4) {
+                            System.out.println(AlbumService.getInstance().getAlbums());
                             clientService.playAlbum();
                             for(Album elem: albumService.getAlbums())
                             {
@@ -204,7 +210,7 @@ public class Main {
 
                         }
                         else if (opt == 3) {
-                            break;
+                            clientService.playAlbum();
                         }
                         else if (opt == 4) {
                             System.out.println("bye");

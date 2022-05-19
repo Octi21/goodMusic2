@@ -1,5 +1,8 @@
 package song;
 
+import album.AlbumDao;
+import album.AlbumService;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -31,11 +34,13 @@ public class SongService {
         {
             if (elem.getId() == idSong)
             {
-                System.out.println("listed to " + elem.getName());
+                System.out.println("listening to " + elem.getName());
 
                 elem.addStream();
                 SongDao.getInstance().update(elem);
 
+                AlbumService.getInstance().setAlbums(AlbumDao.getInstance().getTable());
+                AlbumDao.getInstance().setAlbums(AlbumDao.getInstance().getTable());
                 break;
             }
         }

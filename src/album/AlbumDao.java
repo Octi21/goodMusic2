@@ -81,6 +81,7 @@ public class AlbumDao implements Dao<Album> {
             int nrStreams = resultSet.getInt("nrStreams");
             int idArtist = resultSet.getInt("idArtist");
 
+
             // ce fac cu nr streams ?
             return new Album(id,name,artistName,nrSongs,songs
                     ,nrStreams,idArtist);
@@ -133,11 +134,39 @@ public class AlbumDao implements Dao<Album> {
 
     @Override
     public int update(Album album){
-        return 0;
+        if (album == null)
+            return -1;
+        try{
+            String query = "update album set nrStreams = ? where id = ?";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,album.getNrStreams());
+            preparedStatement.setInt(2,album.getId());
+            preparedStatement.executeUpdate();
+            for(Album elem: albums)
+            {
+                if (elem.getId() == album.getId())
+                {
+                    elem.setNrStreams(album.getNrStreams());
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return album.getId();
     }
     @Override
     public void delete(Album album){
         System.out.println("delete");
+    }
+
+    public void setAlbums(ArrayList<Album> albums) {
+        AlbumDao.albums = albums;
+    }
+
+    public ArrayList<Album> getAlbums() {
+        return albums;
     }
 }
 
