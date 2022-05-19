@@ -2,6 +2,9 @@ package song;
 
 import album.AlbumDao;
 import album.AlbumService;
+import playlist.Playlist;
+import playlist.PlaylistDao;
+import playlist.PlaylistService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -41,6 +44,13 @@ public class SongService {
 
                 AlbumService.getInstance().setAlbums(AlbumDao.getInstance().getTable());
                 AlbumDao.getInstance().setAlbums(AlbumDao.getInstance().getTable());
+
+                PlaylistService.getInstance().setPlaylists(
+                        PlaylistDao.getInstance().getTable());
+                PlaylistDao.getInstance().setPlaylists(
+                        PlaylistDao.getInstance().getTable());
+                // resinstantiem playlisturile si albumele pt a vedea
+                //nr de streamuri
                 break;
             }
         }

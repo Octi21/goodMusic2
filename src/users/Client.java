@@ -47,7 +47,7 @@ public class Client extends User{
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", card= " + card +
-                ", playlist= " + playlist +
+                ", playlist= " + playlist.toStringghe() +
                 ", data= " + date +
                 '}';
     }

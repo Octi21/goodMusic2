@@ -49,13 +49,25 @@ public class Playlist {
 
     @Override
     public String toString() {
+        String aux = "";
+        for (Song elem: listSongs)
+        {
+            aux += elem.toStringghe();
+        }
+
         return "Playlist{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", artistName='" + creatorName + '\'' +
                 ", numberSongs=" + numberSongs +
-                ", listSongs=" + listSongs +
+                ", listSongs=" + aux +
                 '}';
+    }
+
+    public String toStringghe(){
+        return "Playlist{" +
+                "id=" + id +
+                ", name='" + name + "'}";
     }
 
     public int getId() {

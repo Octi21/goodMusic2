@@ -141,4 +141,8 @@ public class PlaylistDao implements Dao<Playlist> {
         System.out.println("delete");
     }
 
+
+    public void setPlaylists(ArrayList<Playlist> playlists) {
+        PlaylistDao.playlists = playlists;
+    }
 }

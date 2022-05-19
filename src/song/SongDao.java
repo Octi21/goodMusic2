@@ -98,7 +98,7 @@ public class SongDao implements Dao<Song> {
         try {
             String query = "select s.* from client c, playlist p, " +
                     "auxAdd a, song s where p.idClient = ? and p.id " +
-                    "= a.idPlaylist and a.idSong = s.id;";
+                    "= a.idPlaylist and a.idSong = s.id and c.id = p.idClient;";
 
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);

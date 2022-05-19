@@ -4,6 +4,7 @@ import album.Album;
 import album.AlbumDao;
 import db.Dao;
 import song.Song;
+import song.SongService;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,14 +12,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PlaylistService {
-    ArrayList <Playlist> playlists;
 
-    public PlaylistService(ArrayList<Playlist> playlists) {
-        this.playlists = playlists;
+    private static ArrayList <Playlist> playlists = new ArrayList<>();
+    private static PlaylistService singelton = null;
+
+    private PlaylistService() {
+        playlists = PlaylistDao.getInstance().getTable();
     }
 
-    public PlaylistService() {
-        playlists = new ArrayList<>();
+    public static PlaylistService getInstance() {
+        if(singelton == null)
+            singelton = new PlaylistService();
+        return singelton;
     }
 
 
@@ -50,6 +55,23 @@ public class PlaylistService {
 
     }
 
+    public void playPlaylist(int idClient)
+    {
+        for(Playlist elem: playlists)
+        {
+            if(elem.getIdClient() == idClient)
+            {
+                System.out.println("listening to Playlist: "
+                        + elem.getName());
+                for(Song so: elem.getListSongs())
+                {
+                    SongService.getInstance().listened(so.getId());
+                }
+
+                break;
+            }
+        }
+    }
 
 
 

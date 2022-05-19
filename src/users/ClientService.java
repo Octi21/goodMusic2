@@ -121,7 +121,7 @@ public class ClientService {
 
         Client client = ClientDao.getInstance()
                 .getById(login(username,password));
-        System.out.println(client);
+//        System.out.println(client);
         return client;
 
     }
@@ -160,6 +160,12 @@ public class ClientService {
         AlbumService.getInstance().setAlbums(
                 AlbumDao.getInstance().getAlbums());     // brute force update streams
     }
+
+    public void playPlaylist(int idClient)
+    {
+        PlaylistService.getInstance().playPlaylist(idClient);
+    }
+
 
 
 

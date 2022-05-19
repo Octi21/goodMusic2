@@ -69,7 +69,7 @@ public class Main {
             //   playlist
         ArrayList <Playlist> playlists =
                 PlaylistDao.getInstance().getTable();
-        PlaylistService playlistService = new PlaylistService(playlists);
+        PlaylistService playlistService =PlaylistService.getInstance();
         System.out.println("Playlists:");
         for(Playlist elem: playlists)
         {
@@ -118,7 +118,8 @@ public class Main {
 
             if(opt == 1)
             {
-                Client client = clientService.log();
+                Client client = clientService.log(); // !!clientul logat
+                System.out.println(client);
 //                System.out.print("username/email: ");
 //                String username = scanner.next();
 //                System.out.print("password: ");
@@ -154,9 +155,16 @@ public class Main {
                         System.out.println("5. exit");
 
                         opt = scanner.nextInt();
+                        if (opt == 1)
+                        {
+                            break;
+                        }
 
-                        if(opt == 2) {
-
+                        else if(opt == 2) {
+                            System.out.println(PlaylistService.getInstance().getPlaylists());
+                            clientService.playPlaylist(client.getId());
+                            System.out.println(PlaylistService.getInstance().getPlaylists());
+                            System.out.println(SongService.getInstance().getSongs());
                         }
                         else if (opt == 3) {
                             System.out.println(AlbumService.getInstance().getAlbums());
