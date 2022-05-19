@@ -2,6 +2,8 @@ package playlist;
 
 import album.Album;
 import album.AlbumDao;
+import auxAdd.AuxAdd;
+import auxAdd.AuxAddDao;
 import db.Dao;
 import song.Song;
 import song.SongService;
@@ -48,7 +50,7 @@ public class PlaylistService {
 
         Playlist playlist = new Playlist(name,creatorName,
                 0,new ArrayList<Song>(),idClient);
-
+        PlaylistDao.getInstance().insert(playlist);
         playlists.add(playlist);
         return playlist;
 
@@ -73,6 +75,39 @@ public class PlaylistService {
         }
     }
 
+    public void addSong(int idClient)
+    {
+        int i= 1;
+        for (Song so: SongService.getInstance().getSongs())
+        {
+            System.out.println(i +". "+ so.getName());
+            i +=1;
+        }
+        int idPlaylist = 0;
+        for (Playlist elem: playlists)
+        {
+            if(elem.getIdClient() == idClient)
+            {
+                idPlaylist = elem.getId();
+                break;
+            }
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int opt = scanner.nextInt();
+
+        System.out.println(SongService.getInstance().
+                getSongs().get(opt-1).getName() + " added to ur plst");
+
+        int idSong = SongService.getInstance().getSongs().get(opt-1).getId();
+        AuxAdd.setAux(AuxAddDao.getInstance().getLastId());
+
+        AuxAdd auxAdd = new AuxAdd(idSong,idPlaylist,idClient);
+
+        AuxAddDao.getInstance().insert(auxAdd);
+    }
+
+
 
 
 
@@ -81,7 +116,7 @@ public class PlaylistService {
     }
 
     public void setPlaylists(ArrayList<Playlist> playlists) {
-        this.playlists = playlists;
+        PlaylistService.playlists = playlists;
     }
 
 }

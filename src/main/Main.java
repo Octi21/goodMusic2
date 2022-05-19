@@ -157,7 +157,10 @@ public class Main {
                         opt = scanner.nextInt();
                         if (opt == 1)
                         {
-                            break;
+                            System.out.println(PlaylistService.getInstance().getPlaylists());
+                            clientService.addSongPlaylist(client.getId());
+                            System.out.println(PlaylistService.getInstance().getPlaylists());
+
                         }
 
                         else if(opt == 2) {

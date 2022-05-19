@@ -93,4 +93,17 @@ public class AuxAddDao implements Dao<AuxAdd> {
     public void delete(AuxAdd auxAdd) {
 
     }
+
+    public int getLastId()
+    {
+        return auxAdds.get(auxAdds.size()-1).getIdAdd();
+    }
+
+    public ArrayList<AuxAdd> getAuxAdds() {
+        return auxAdds;
+    }
+
+    public void setAuxAdds(ArrayList<AuxAdd> auxAdds) {
+        this.auxAdds = auxAdds;
+    }
 }

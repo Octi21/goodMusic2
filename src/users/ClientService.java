@@ -6,6 +6,7 @@ import album.AlbumService;
 import card.Card;
 import card.CardService;
 import playlist.Playlist;
+import playlist.PlaylistDao;
 import playlist.PlaylistService;
 import song.Song;
 import song.SongService;
@@ -166,7 +167,15 @@ public class ClientService {
         PlaylistService.getInstance().playPlaylist(idClient);
     }
 
+    public void addSongPlaylist(int idClient)
+    {
+        PlaylistService.getInstance().addSong(idClient);
 
+        PlaylistService.getInstance().setPlaylists(
+                PlaylistDao.getInstance().getTable());      // brute f
+        PlaylistDao.getInstance().setPlaylists(
+                PlaylistDao.getInstance().getTable());
+    }
 
 
 
