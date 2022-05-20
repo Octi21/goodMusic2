@@ -161,8 +161,7 @@ public class ClientService {
         Scanner scanner = new Scanner(System.in);
         int opt = scanner.nextInt();
 
-        AlbumService.getInstance().listened(
-                AlbumService.getInstance().getLastId());
+        AlbumService.getInstance().listened(opt);
 
         AlbumService.getInstance().setAlbums(
                 AlbumDao.getInstance().getAlbums());     // brute force update streams

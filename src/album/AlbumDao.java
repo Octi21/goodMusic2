@@ -50,7 +50,7 @@ public class AlbumDao implements Dao<Album> {
         ArrayList <Album> albumList  = new ArrayList<>();
         try{
             String query = "select al.* from album al , artist ar" +
-                    " where al.idArtist = ? ;";
+                    " where al.idArtist = ? and al.idArtist = ar.id;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1, idArtist);
@@ -107,7 +107,7 @@ public class AlbumDao implements Dao<Album> {
         albums.add(album);
         try {
             String query = "insert into album(id,name," +
-                    "artistName,nrSongs,streamNr) values " +
+                    "artistName,nrSongs,nrStreams,idArtist) values " +
                     "(?,?,?,?,?,?)";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);

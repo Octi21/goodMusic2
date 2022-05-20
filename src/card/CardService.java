@@ -37,7 +37,7 @@ public class CardService {
 //        protected int suma;
         Card.setAux(getLastId());
 
-        Scanner scanner = new Scanner(System.in).useDelimiter("\n");;
+        Scanner scanner = new Scanner(System.in).useDelimiter("\n");
 
         System.out.println("CardInfo: ");
 

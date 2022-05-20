@@ -53,7 +53,7 @@ public class SongDao implements Dao<Song> {
 
         try {
             String query = "select s.*  from song s, album a " +
-                    "where s.idAlbum = ? ;";
+                    "where s.idAlbum = ? and s.idAlbum = a.id;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1, idAlbum);
@@ -75,7 +75,7 @@ public class SongDao implements Dao<Song> {
 
         try {
             String query = "select s.*  from song s, artist a " +
-                    "where s.idArtist = ? ;";
+                    "where s.idArtist = ? and s.idArtist = a.id;";
             PreparedStatement preparedStatement =
                     Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1, idArtist);
@@ -154,7 +154,7 @@ public class SongDao implements Dao<Song> {
         songs.add(song);
         try {
             String query = "insert into song(id,name," +
-                    "artistName,ft,length,streamNr) values " +
+                    "artistName,ft,length,streamNr,idArtist,idAlbum) values " +
                     "(?,?,?,?,?,?,?,?);";
             PreparedStatement preparedStatement = Dao.conn.prepareStatement(query);
             preparedStatement.setInt(1,song.getId());

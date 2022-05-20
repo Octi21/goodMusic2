@@ -48,15 +48,12 @@ public class Main {
         System.out.println("Albums:");
         for(Album elem: albums)
         {
-//            ArrayList <Song> songs1 = SongDao.getInstance().songIdAlbum(elem.getId());
-//            elem.setListSongs(songs1);
-
             System.out.println(elem);
         }
 
             //  artist
         ArrayList <Artist> artists = ArtistDao.getInstance().getTable();
-        ArtistService artistService = new ArtistService(artists);
+        ArtistService artistService = ArtistService.getInstance();
         System.out.println("Artists:");
         for(Artist elem: artists)
         {
@@ -82,7 +79,7 @@ public class Main {
 
             //  admin
         ArrayList <Admin> admins = AdminDao.getInstance().getTable();
-        AdminService adminService = new AdminService(admins);
+        AdminService adminService = AdminService.getInstance();
 
             // clients
         ArrayList <Client> clients = new ArrayList<Client>();
@@ -120,30 +117,6 @@ public class Main {
             {
                 Client client = clientService.log(); // !!clientul logat
                 System.out.println(client);
-//                System.out.print("username/email: ");
-//                String username = scanner.next();
-//                System.out.print("password: ");
-//                String password = scanner.next();
-////                System.out.println(username);
-////                System.out.println(password);
-//
-//                while(clientService.login(username,password) <= 0)
-//                {
-//                    if(clientService.login(username,password) == -1)
-//                        System.out.println("wrong password");
-//                    else
-//                        System.out.println("try again");
-//                    System.out.print("username/email: ");
-//                    username = scanner.next();
-//                    System.out.print("password: ");
-//                    password = scanner.next();
-//                }
-//
-//                System.out.println("welcome " + username);
-//                System.out.println(clientService.login(username,password));
-//                Client client = ClientDao.getInstance()
-//                        .getById(clientService.login(username,password));
-//                System.out.println(client);
 
                 while(true)
                 {
@@ -255,7 +228,65 @@ public class Main {
             }
             else if( opt == 4)
             {
-                break;
+                Admin admin = adminService.log(); // admin logat
+                System.out.println(admin);
+
+                while (true)
+                {
+                    System.out.println("1. add artist");
+                    System.out.println("2. add album");
+                    System.out.println("3. add song");
+                    System.out.println("4. collect money");
+                    System.out.println("5. exit");
+
+                    Scanner scanner1 = new Scanner(System.in);
+                    int opt1 = scanner1.nextInt();
+
+                    if(opt1 == 1)
+                    {
+                        System.out.println(ArtistService.getInstance().getArtists());
+                        AdminService.getInstance().addArtist();
+                        System.out.println(ArtistService.getInstance().getArtists());
+
+                    }
+                    else if(opt1 == 2)
+                    {
+                        AdminService.getInstance().addAlbum();
+                        System.out.println(AlbumService.getInstance().getAlbums());
+                        System.out.println(ArtistService.getInstance().getArtists());
+                        for (Artist elem: ArtistService.getInstance().getArtists())
+                        {
+                            System.out.println(elem);
+                        }
+                    }
+                    else if(opt1 == 3)
+                    {
+                        AdminService.getInstance().addSong();
+                        System.out.println(SongService.getInstance().getSongs());
+                        System.out.println(AlbumService.getInstance().getAlbums());
+
+                        for (Artist elem: ArtistService.getInstance().getArtists())
+                        {
+                            System.out.println(elem);
+                        }
+                    }
+                    else if(opt1 == 4)
+                    {
+
+                    }
+                    else if(opt1 == 5)
+                    {
+                        System.out.println("bye");
+                        break;
+                    }
+                    else
+                    {
+                        System.out.println("wrong command");
+                    }
+
+                }
+
+
             }
             else
             {

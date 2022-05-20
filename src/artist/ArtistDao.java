@@ -100,11 +100,45 @@ public class ArtistDao implements Dao<Artist> {
 
     @Override
     public int update(Artist artist) {
-        return 0;
+        if (artist == null)
+            return -1;
+        try{
+            String query = "update artist set nrAlbums = ? ," +
+                    " nrSongs = ?  where id = ?";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,
+                    artist.getNrAlbums());
+            preparedStatement.setInt(2,
+                    artist.getNrSongs());
+            preparedStatement.setInt(3,
+                    artist.getId());
+            preparedStatement.executeUpdate();
+            for(Artist elem: artists)
+            {
+                if (elem.getId() == artist.getId())
+                {
+                    elem.setNrSongs(artist.getNrSongs());
+                    elem.setNrAlbums(artist.getNrAlbums());
+                }
+            }
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return artist.getId();
     }
 
     @Override
     public void delete(Artist artist) {
 
+    }
+
+    public ArrayList<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(ArrayList<Artist> artists) {
+        ArtistDao.artists = artists;
     }
 }

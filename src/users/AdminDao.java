@@ -49,6 +49,20 @@ public class AdminDao implements Dao<Admin> {
 
     @Override
     public Admin getById(int id) {
+        try{
+            String query = "select * from admin where id = ?";
+            PreparedStatement preparedStatement =
+                    Dao.conn.prepareStatement(query);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next())
+            {
+                return rowToObject(resultSet);
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
         return null;
     }
 
