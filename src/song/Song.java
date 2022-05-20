@@ -2,7 +2,7 @@ package song;
 
 import java.util.*;
 
-public class Song {
+public class Song implements Comparable<Song>{
     protected static int aux = 0;
 
     protected int id;
@@ -56,6 +56,16 @@ public class Song {
     {
         streamNr ++;
     }
+
+    @Override
+    public int compareTo(Song o) {
+        if (streamNr < o.streamNr)
+            return 1;
+        else if (streamNr > o.streamNr)
+            return -1;
+        else return 0;
+    }
+
 
     @Override
     public String toString() {

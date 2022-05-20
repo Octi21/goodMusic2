@@ -236,7 +236,7 @@ public class Main {
                     System.out.println("1. add artist");
                     System.out.println("2. add album");
                     System.out.println("3. add song");
-                    System.out.println("4. collect money");
+                    System.out.println("4. most listened?");
                     System.out.println("5. exit");
 
                     Scanner scanner1 = new Scanner(System.in);
@@ -272,6 +272,7 @@ public class Main {
                     }
                     else if(opt1 == 4)
                     {
+                        AdminService.getInstance().showSongs();
 
                     }
                     else if(opt1 == 5)

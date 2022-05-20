@@ -11,6 +11,7 @@ import song.SongService;
 import start.Audit;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class AdminService {
@@ -125,6 +126,20 @@ public class AdminService {
 
         audit.write("Song added");
     }
+
+    public void showSongs()
+    {
+        PriorityQueue <Song> songs = new PriorityQueue<>();
+
+        songs.addAll(SongService.getInstance().getSongs());
+
+        while (! songs.isEmpty())
+        {
+            Song s = songs.poll();
+            System.out.println(s.toStringghe());
+        }
+    }
+
 
 
     public ArrayList<Admin> getAdmins() {
