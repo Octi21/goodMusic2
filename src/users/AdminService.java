@@ -8,6 +8,7 @@ import artist.ArtistService;
 import services.Service;
 import song.Song;
 import song.SongService;
+import start.Audit;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -15,6 +16,7 @@ import java.util.Scanner;
 public class AdminService {
     private static ArrayList <Admin> admins = new ArrayList<>();
     private static AdminService singelton = null;
+    private static Audit audit = new Audit();
 
     private AdminService() {
         admins = AdminDao.getInstance().getTable();
@@ -77,6 +79,7 @@ public class AdminService {
     public void addArtist()
     {
         ArtistService.getInstance().add();
+        audit.write("Artist added");
     }
 
     public void addAlbum()
@@ -96,6 +99,8 @@ public class AdminService {
         ArtistService.getInstance().setArtists(
                 ArtistDao.getInstance().getTable());
 
+
+        audit.write("Album added");
     }
 
     public void addSong()
@@ -118,6 +123,7 @@ public class AdminService {
         AlbumService.getInstance().setAlbums(
                 AlbumDao.getInstance().getTable());
 
+        audit.write("Song added");
     }
 
 

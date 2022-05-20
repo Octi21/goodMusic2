@@ -1,7 +1,5 @@
 package users;
 
-import start.Card;
-
 public class Admin extends User{
     protected static int aux = 0;
 
